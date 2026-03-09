@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 430">
+  <rect width="340" height="430" fill="#0d1117" rx="10"/>
+
+  <!-- Title -->
+  <text x="20" y="26" fill="#6e7681" font-size="11" font-family="ui-sans-serif,sans-serif" letter-spacing="1">URL ROUTING FLOW</text>
+
+  <!-- ── Box 1: Browser ──────────────────────────────── -->
+  <rect x="60" y="38" width="220" height="54" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="170" y="58" fill="#8b949e" font-size="11" font-family="ui-sans-serif,sans-serif" text-anchor="middle" font-weight="600">Browser</text>
+  <text x="170" y="78" fill="#e6edf3" font-size="13" font-family="Courier New,Courier,monospace" text-anchor="middle">GET /books/42/</text>
+
+  <!-- Arrow 1 -->
+  <line x1="170" y1="92" x2="170" y2="118" stroke="#484f58" stroke-width="1.5"/>
+  <polygon points="165,116 175,116 170,123" fill="#484f58"/>
+
+  <!-- ── Box 2: project/urls.py ─────────────────────── -->
+  <rect x="40" y="123" width="260" height="82" rx="8" fill="#161b22" stroke="#388bfd" stroke-width="1.5"/>
+  <text x="60" y="143" fill="#388bfd" font-size="10" font-family="ui-sans-serif,sans-serif" font-weight="600">project / urls.py</text>
+  <text x="60" y="162" fill="#6e7681" font-size="11" font-family="Courier New,Courier,monospace">path(</text>
+  <text x="96" y="162" fill="#79c0ff" font-size="11" font-family="Courier New,Courier,monospace">"books/"</text>
+  <text x="158" y="162" fill="#6e7681" font-size="11" font-family="Courier New,Courier,monospace">, include(</text>
+  <text x="226" y="162" fill="#79c0ff" font-size="11" font-family="Courier New,Courier,monospace">"books.urls"</text>
+  <text x="316" y="162" fill="#6e7681" font-size="11" font-family="Courier New,Courier,monospace">))</text>
+  <text x="60" y="196" fill="#388bfd" font-size="10" font-family="ui-sans-serif,sans-serif">matched: "books/" — delegates the rest to books.urls</text>
+
+  <!-- Arrow 2 — with side label -->
+  <line x1="170" y1="205" x2="170" y2="232" stroke="#484f58" stroke-width="1.5"/>
+  <polygon points="165,230 175,230 170,237" fill="#484f58"/>
+  <text x="178" y="222" fill="#6e7681" font-size="10" font-family="ui-sans-serif,sans-serif">remaining: "42/"</text>
+
+  <!-- ── Box 3: books/urls.py ───────────────────────── -->
+  <rect x="40" y="237" width="260" height="82" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="1.5"/>
+  <text x="60" y="257" fill="#3fb950" font-size="10" font-family="ui-sans-serif,sans-serif" font-weight="600">books / urls.py</text>
+  <text x="60" y="276" fill="#6e7681" font-size="11" font-family="Courier New,Courier,monospace">path(</text>
+  <text x="96" y="276" fill="#79c0ff" font-size="11" font-family="Courier New,Courier,monospace">"&lt;int:id&gt;/"</text>
+  <text x="175" y="276" fill="#6e7681" font-size="11" font-family="Courier New,Courier,monospace">, get_book)</text>
+  <text x="60" y="310" fill="#3fb950" font-size="10" font-family="ui-sans-serif,sans-serif">matched: "42/" — calls get_book(request, id=42)</text>
+
+  <!-- Arrow 3 -->
+  <line x1="170" y1="319" x2="170" y2="345" stroke="#484f58" stroke-width="1.5"/>
+  <polygon points="165,343 175,343 170,350" fill="#484f58"/>
+
+  <!-- ── Box 4: View ─────────────────────────────────── -->
+  <rect x="60" y="350" width="220" height="58" rx="8" fill="#161b22" stroke="#d2a8ff" stroke-width="1.5"/>
+  <text x="170" y="370" fill="#d2a8ff" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle" font-weight="600">get_book(request, id=42)</text>
+  <text x="170" y="388" fill="#7ee787" font-size="11" font-family="Courier New,Courier,monospace" text-anchor="middle">return HttpResponse(...)</text>
+  <text x="170" y="402" fill="#6e7681" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle">→ response sent back to browser</text>
+</svg>

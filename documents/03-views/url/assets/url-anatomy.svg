@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 175">
+  <rect width="480" height="175" fill="#0d1117" rx="10"/>
+
+  <!-- Title -->
+  <text x="20" y="26" fill="#6e7681" font-size="11" font-family="ui-sans-serif,sans-serif" letter-spacing="1">URL ANATOMY</text>
+
+  <!-- URL segments (font-size 15, Courier New ~9px/char) -->
+  <!-- https: x=20, 5 chars = 45px, ends at 65 -->
+  <text x="20"  y="68" fill="#58a6ff" font-size="15" font-family="Courier New,Courier,monospace">https</text>
+  <!-- ://: x=65, 3 chars = 27px, ends at 92 -->
+  <text x="65"  y="68" fill="#484f58" font-size="15" font-family="Courier New,Courier,monospace">://</text>
+  <!-- example.com: x=92, 11 chars = 99px, ends at 191 -->
+  <text x="92"  y="68" fill="#3fb950" font-size="15" font-family="Courier New,Courier,monospace">example.com</text>
+  <!-- /books/: x=191, 7 chars = 63px, ends at 254 -->
+  <text x="191" y="68" fill="#f0883e" font-size="15" font-family="Courier New,Courier,monospace">/books/</text>
+  <!-- 42: x=254, 2 chars = 18px, ends at 272 -->
+  <text x="254" y="68" fill="#e3b341" font-size="15" font-family="Courier New,Courier,monospace">42</text>
+  <!-- ?: x=272, ends at 281 -->
+  <text x="272" y="68" fill="#484f58" font-size="15" font-family="Courier New,Courier,monospace">?</text>
+  <!-- sort=price: x=281, 10 chars = 90px, ends at 371 -->
+  <text x="281" y="68" fill="#bc8cff" font-size="15" font-family="Courier New,Courier,monospace">sort=price</text>
+  <!-- &: x=371, ends at 380 -->
+  <text x="371" y="68" fill="#484f58" font-size="15" font-family="Courier New,Courier,monospace">&amp;</text>
+  <!-- page=1: x=380, 6 chars = 54px, ends at 434 -->
+  <text x="380" y="68" fill="#bc8cff" font-size="15" font-family="Courier New,Courier,monospace">page=1</text>
+
+  <!-- Underlines -->
+  <!-- scheme -->
+  <rect x="20"  y="71" width="45"  height="2" rx="1" fill="#58a6ff"/>
+  <!-- domain -->
+  <rect x="92"  y="71" width="99"  height="2" rx="1" fill="#3fb950"/>
+  <!-- path (spanning /books/ and 42) -->
+  <rect x="191" y="71" width="81"  height="2" rx="1" fill="#f0883e"/>
+  <!-- path param box around 42 -->
+  <rect x="252" y="63" width="22"  height="10" rx="3" fill="none" stroke="#e3b341" stroke-width="1.5"/>
+  <!-- query string -->
+  <rect x="281" y="71" width="153" height="2" rx="1" fill="#bc8cff"/>
+
+  <!-- Dashed connectors + labels -->
+  <!-- scheme: center=42 -->
+  <line x1="42"  y1="73" x2="42"  y2="100" stroke="#58a6ff" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="42"  y="113" fill="#58a6ff" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle">scheme</text>
+
+  <!-- domain: center=141 -->
+  <line x1="141" y1="73" x2="141" y2="100" stroke="#3fb950" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="141" y="113" fill="#3fb950" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle">domain</text>
+
+  <!-- path: center of /books/ = 222 — longer line so label clears path-param -->
+  <line x1="222" y1="73" x2="222" y2="132" stroke="#f0883e" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="222" y="145" fill="#f0883e" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle">path</text>
+
+  <!-- path param: center of 42 = 263 — shorter line, sits above path label -->
+  <line x1="263" y1="73" x2="263" y2="100" stroke="#e3b341" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="263" y="113" fill="#e3b341" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle">path</text>
+  <text x="263" y="126" fill="#e3b341" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle">param</text>
+
+  <!-- query params: center of sort=price..page=1 = 357 -->
+  <line x1="357" y1="73" x2="357" y2="100" stroke="#bc8cff" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="357" y="113" fill="#bc8cff" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle">query params</text>
+</svg>

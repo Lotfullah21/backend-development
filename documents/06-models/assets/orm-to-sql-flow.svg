@@ -1,0 +1,259 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="620" viewBox="0 0 1280 620" role="img" aria-labelledby="title desc">
+  <title id="title">How Django ORM turns Python code into SQL</title>
+  <desc id="desc">An animated diagram showing a Django model query moving from Python code through the ORM into SQL and then into the database.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+
+    <linearGradient id="card" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#161b22" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <linearGradient id="accent-blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+
+    <linearGradient id="accent-green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#14b8a6" />
+    </linearGradient>
+
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#020617" flood-opacity="0.45" />
+    </filter>
+
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#60a5fa" />
+    </marker>
+
+    <style>
+      .bg { fill: url(#bg); }
+      .frame {
+        fill: none;
+        stroke: rgba(148, 163, 184, 0.18);
+        stroke-width: 1.5;
+      }
+      .title {
+        fill: #f8fafc;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 34px;
+        font-weight: 700;
+      }
+      .subtitle {
+        fill: #cbd5e1;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 17px;
+      }
+      .section-pill {
+        fill: rgba(56, 189, 248, 0.12);
+        stroke: rgba(56, 189, 248, 0.35);
+        stroke-width: 1.25;
+      }
+      .section-pill-text {
+        fill: #bae6fd;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .panel {
+        fill: url(#card);
+        stroke: #1e293b;
+        stroke-width: 1.5;
+        filter: url(#shadow);
+      }
+      .panel-title {
+        fill: #f8fafc;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+      }
+      .panel-copy {
+        fill: #cbd5e1;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 14px;
+      }
+      .code-box {
+        fill: #020617;
+        stroke: #1e293b;
+        stroke-width: 1.25;
+      }
+      .code-text {
+        fill: #e2e8f0;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 16px;
+      }
+      .comment-text {
+        fill: #93c5fd;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 14px;
+      }
+      .chip {
+        fill: rgba(148, 163, 184, 0.10);
+        stroke: rgba(148, 163, 184, 0.25);
+        stroke-width: 1.25;
+      }
+      .chip-text {
+        fill: #e2e8f0;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .path-line {
+        fill: none;
+        stroke: #60a5fa;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        marker-end: url(#arrow);
+      }
+      .path-glow {
+        fill: none;
+        stroke: rgba(96, 165, 250, 0.22);
+        stroke-width: 10;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .label {
+        fill: #93c5fd;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .moving-packet {
+        fill: #38bdf8;
+      }
+      .moving-packet-glow {
+        fill: rgba(56, 189, 248, 0.24);
+      }
+      .pulse-ring {
+        fill: none;
+        stroke: rgba(52, 211, 153, 0.55);
+        stroke-width: 2.5;
+      }
+      .db-top {
+        fill: #0f766e;
+        opacity: 0.55;
+      }
+      .db-body {
+        fill: #0b3b39;
+        stroke: #14b8a6;
+        stroke-width: 1.8;
+      }
+      .db-line {
+        stroke: rgba(226, 232, 240, 0.24);
+        stroke-width: 1.5;
+      }
+      .db-text {
+        fill: #ecfeff;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .caption-title {
+        fill: #f8fafc;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .caption-copy {
+        fill: #cbd5e1;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 14px;
+      }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1280" height="620" rx="28" />
+  <rect class="frame" x="24" y="24" width="1232" height="572" rx="24" />
+
+  <text class="title" x="72" y="74">How Django ORM Turns Python Into SQL</text>
+  <text class="subtitle" x="72" y="104">You write model and QuerySet code. Django translates it into SQL and sends it to the database.</text>
+
+  <rect class="section-pill" x="72" y="130" width="176" height="34" rx="17" />
+  <text class="section-pill-text" x="160" y="152" text-anchor="middle">Python to Database</text>
+
+  <rect class="panel" x="72" y="196" width="300" height="250" rx="24" />
+  <rect class="panel" x="490" y="196" width="300" height="250" rx="24" />
+  <rect class="panel" x="908" y="196" width="300" height="250" rx="24" />
+
+  <text class="panel-title" x="112" y="238">1. Python code</text>
+  <text class="panel-copy" x="112" y="264">You write model and QuerySet code in Python.</text>
+  <rect class="code-box" x="112" y="290" width="220" height="126" rx="16" />
+  <text class="comment-text" x="130" y="312"># manage.py shell</text>
+  <text class="code-text" x="130" y="338">Course.objects</text>
+  <text class="code-text" x="130" y="364">.filter(</text>
+  <text class="code-text" x="154" y="390">name="Python"</text>
+  <text class="code-text" x="130" y="416">)</text>
+
+  <rect class="chip" x="112" y="458" width="82" height="28" rx="14" />
+  <text class="chip-text" x="153" y="476" text-anchor="middle">model</text>
+  <rect class="chip" x="204" y="458" width="98" height="28" rx="14" />
+  <text class="chip-text" x="253" y="476" text-anchor="middle">QuerySet</text>
+
+  <text class="panel-title" x="530" y="238">2. Django ORM</text>
+  <text class="panel-copy" x="530" y="264">The ORM understands model metadata and</text>
+  <text class="panel-copy" x="530" y="286">builds the matching SQL query for you.</text>
+  <rect class="code-box" x="530" y="312" width="220" height="88" rx="16" />
+  <text class="code-text" x="548" y="340">Model -&gt; table</text>
+  <text class="code-text" x="548" y="366">Field -&gt; column</text>
+  <text class="code-text" x="548" y="392">Instance -&gt; row</text>
+
+  <rect class="chip" x="530" y="458" width="76" height="28" rx="14" />
+  <text class="chip-text" x="568" y="476" text-anchor="middle">mapping</text>
+  <rect class="chip" x="616" y="458" width="122" height="28" rx="14" />
+  <text class="chip-text" x="677" y="476" text-anchor="middle">translation</text>
+
+  <text class="panel-title" x="948" y="238">3. SQL + database</text>
+  <text class="panel-copy" x="948" y="264">The database receives SQL and returns rows.</text>
+  <rect class="code-box" x="948" y="300" width="220" height="100" rx="16" />
+  <text class="code-text" x="966" y="328">SELECT *</text>
+  <text class="code-text" x="966" y="354">FROM courses_course</text>
+  <text class="code-text" x="966" y="380">WHERE name = 'Python';</text>
+
+  <ellipse class="db-top" cx="1058" cy="474" rx="64" ry="15" />
+  <rect class="db-body" x="994" y="474" width="128" height="54" rx="10" />
+  <ellipse class="db-body" cx="1058" cy="528" rx="64" ry="15" />
+  <line class="db-line" x1="1004" y1="491" x2="1112" y2="491" />
+  <line class="db-line" x1="1004" y1="506" x2="1112" y2="506" />
+  <text class="db-text" x="1058" y="510" text-anchor="middle">database</text>
+
+  <path class="path-glow" d="M384 362 H470" />
+  <path class="path-line" d="M384 362 H470" />
+  <text class="label" x="427" y="338" text-anchor="middle">Python query</text>
+
+  <path class="path-glow" d="M804 362 H890" />
+  <path class="path-line" d="M804 362 H890" />
+  <text class="label" x="847" y="338" text-anchor="middle">Generated SQL</text>
+
+  <circle class="moving-packet-glow" cx="0" cy="0" r="12">
+    <animateMotion dur="2.6s" repeatCount="indefinite" path="M384 362 H470" />
+  </circle>
+  <circle class="moving-packet" cx="0" cy="0" r="6">
+    <animateMotion dur="2.6s" repeatCount="indefinite" path="M384 362 H470" />
+  </circle>
+
+  <circle class="moving-packet-glow" cx="0" cy="0" r="12">
+    <animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M804 362 H890" />
+  </circle>
+  <circle class="moving-packet" cx="0" cy="0" r="6">
+    <animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite" path="M804 362 H890" />
+  </circle>
+
+  <circle class="pulse-ring" cx="640" cy="362" r="18">
+    <animate attributeName="r" values="18;30;18" dur="2.2s" repeatCount="indefinite" />
+    <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.2s" repeatCount="indefinite" />
+  </circle>
+  <circle fill="url(#accent-green)" cx="640" cy="362" r="8">
+    <animate attributeName="r" values="8;10;8" dur="2.2s" repeatCount="indefinite" />
+  </circle>
+
+  <text class="caption-title" x="72" y="548">What to notice</text>
+  <text class="caption-copy" x="72" y="576">You work with Python objects and QuerySets. Django uses the model definition to build SQL that matches your table structure.</text>
+</svg>

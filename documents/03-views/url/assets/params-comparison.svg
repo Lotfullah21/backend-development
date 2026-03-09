@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 195">
+  <rect width="520" height="195" fill="#0d1117" rx="10"/>
+
+  <!-- Title -->
+  <text x="20" y="26" fill="#6e7681" font-size="11" font-family="ui-sans-serif,sans-serif" letter-spacing="1">PARAMETER TYPES</text>
+
+  <!-- Divider -->
+  <line x1="260" y1="35" x2="260" y2="185" stroke="#21262d" stroke-width="1"/>
+
+  <!-- ─── LEFT PANEL: Path Parameter ─────────────────────────── -->
+
+  <!-- Panel label -->
+  <text x="130" y="52" fill="#e3b341" font-size="12" font-family="ui-sans-serif,sans-serif" text-anchor="middle" font-weight="600">Path Parameter</text>
+
+  <!-- URL: /books/42 — centered at x=130
+       font-size=14 Courier ~8.4px/char
+       /books/ = 7×8.4 = 58.8px → x=92
+       42      = 2×8.4 = 16.8px → x=151
+       full width = 75.6px, start = 130 - 37.8 = 92 -->
+  <text x="92"  y="82" fill="#484f58" font-size="14" font-family="Courier New,Courier,monospace">/books/</text>
+  <text x="151" y="82" fill="#e3b341" font-size="14" font-family="Courier New,Courier,monospace">42</text>
+
+  <!-- Downward arrow from center of "42" (x≈159) -->
+  <line x1="159" y1="87" x2="159" y2="111" stroke="#e3b341" stroke-width="1.5"/>
+  <polygon points="155,109 163,109 159,116" fill="#e3b341"/>
+
+  <!-- Description -->
+  <text x="130" y="132" fill="#8b949e" font-size="11" font-family="ui-sans-serif,sans-serif" text-anchor="middle">Identifies a specific</text>
+  <text x="130" y="147" fill="#8b949e" font-size="11" font-family="ui-sans-serif,sans-serif" text-anchor="middle">resource</text>
+
+  <!-- Use-case note -->
+  <text x="130" y="170" fill="#e3b341" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle" opacity="0.75">Use when the resource is known</text>
+
+  <!-- ─── RIGHT PANEL: Query Parameter ───────────────────────── -->
+
+  <!-- Panel label -->
+  <text x="390" y="52" fill="#bc8cff" font-size="12" font-family="ui-sans-serif,sans-serif" text-anchor="middle" font-weight="600">Query Parameter</text>
+
+  <!-- URL: /books?sort=price — centered at x=390
+       /books? = 7×8.4 = 58.8px → x=314
+       sort=price = 10×8.4 = 84px → x=373
+       full width = 151.2px, start = 390 - 75.6 = 314 -->
+  <text x="314" y="82" fill="#484f58" font-size="14" font-family="Courier New,Courier,monospace">/books?</text>
+  <text x="373" y="82" fill="#bc8cff" font-size="14" font-family="Courier New,Courier,monospace">sort=price</text>
+
+  <!-- Downward arrow from center of "sort=price" (x≈415) -->
+  <line x1="415" y1="87" x2="415" y2="111" stroke="#bc8cff" stroke-width="1.5"/>
+  <polygon points="411,109 419,109 415,116" fill="#bc8cff"/>
+
+  <!-- Description -->
+  <text x="390" y="132" fill="#8b949e" font-size="11" font-family="ui-sans-serif,sans-serif" text-anchor="middle">Filters or modifies</text>
+  <text x="390" y="147" fill="#8b949e" font-size="11" font-family="ui-sans-serif,sans-serif" text-anchor="middle">the result</text>
+
+  <!-- Use-case note -->
+  <text x="390" y="170" fill="#bc8cff" font-size="10" font-family="ui-sans-serif,sans-serif" text-anchor="middle" opacity="0.75">Use for optional filters or options</text>
+</svg>

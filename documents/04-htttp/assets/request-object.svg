@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 295">
+  <rect width="460" height="295" fill="#0d1117" rx="10"/>
+  <text x="20" y="24" fill="#6e7681" font-size="11" font-family="ui-sans-serif,sans-serif" letter-spacing="1">HttpRequest OBJECT — what Django gives your view</text>
+
+  <!-- Card -->
+  <rect x="20" y="34" width="420" height="250" rx="8" fill="#161b22" stroke="#388bfd" stroke-width="1.5"/>
+
+  <!-- Header bar -->
+  <rect x="20" y="34" width="420" height="28" rx="8" fill="#1c3255"/>
+  <rect x="20" y="50"  width="420" height="12" fill="#1c3255"/>
+  <text x="32" y="52" fill="#79c0ff" font-size="12" font-family="Courier New,Courier,monospace" font-weight="600">def my_view(request):  # ← request is HttpRequest</text>
+
+  <!-- Separator after header -->
+  <line x1="20" y1="62" x2="440" y2="62" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Row helper: attr col x=32, arrow x=160, value x=178 -->
+  <!-- Row 0: method -->
+  <text x="32"  y="80" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.method</text>
+  <text x="160" y="80" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="80" fill="#e3b341" font-size="11" font-family="Courier New,Courier,monospace">"GET"  |  "POST"  |  "DELETE"  ...</text>
+  <line x1="32" y1="86" x2="430" y2="86" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 1: path -->
+  <text x="32"  y="102" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.path</text>
+  <text x="160" y="102" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="102" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">"/books/42/"</text>
+  <line x1="32" y1="108" x2="430" y2="108" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 2: GET -->
+  <text x="32"  y="124" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.GET</text>
+  <text x="160" y="124" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="124" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">QueryDict  {"sort": "price", "page": "2"}</text>
+  <line x1="32" y1="130" x2="430" y2="130" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 3: POST -->
+  <text x="32"  y="146" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.POST</text>
+  <text x="160" y="146" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="146" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">QueryDict  {"username": "alice"}</text>
+  <line x1="32" y1="152" x2="430" y2="152" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 4: body -->
+  <text x="32"  y="168" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.body</text>
+  <text x="160" y="168" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="168" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">b'{"title":"REST"}'  (raw bytes — JSON APIs)</text>
+  <line x1="32" y1="174" x2="430" y2="174" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 5: headers -->
+  <text x="32"  y="190" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.headers</text>
+  <text x="160" y="190" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="190" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">{"Content-Type": "...", "Host": "..."}</text>
+  <line x1="32" y1="196" x2="430" y2="196" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 6: user -->
+  <text x="32"  y="212" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.user</text>
+  <text x="160" y="212" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="212" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">&lt;User: alice&gt;  or  AnonymousUser</text>
+  <line x1="32" y1="218" x2="430" y2="218" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 7: FILES -->
+  <text x="32"  y="234" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.FILES</text>
+  <text x="160" y="234" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="234" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">{"avatar": &lt;InMemoryUploadedFile&gt;}</text>
+  <line x1="32" y1="240" x2="430" y2="240" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 8: COOKIES -->
+  <text x="32"  y="256" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.COOKIES</text>
+  <text x="160" y="256" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="256" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">{"sessionid": "abc123"}</text>
+  <line x1="32" y1="262" x2="430" y2="262" stroke="#21262d" stroke-width="0.5"/>
+
+  <!-- Row 9: session -->
+  <text x="32"  y="278" fill="#58a6ff" font-size="11" font-family="Courier New,Courier,monospace">request.session</text>
+  <text x="160" y="278" fill="#484f58" font-size="11" font-family="Courier New,Courier,monospace">→</text>
+  <text x="178" y="278" fill="#8b949e" font-size="11" font-family="Courier New,Courier,monospace">dict-like  {"cart_items": [...]}</text>
+</svg>
