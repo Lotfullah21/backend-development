@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="ui-sans-serif, system-ui, sans-serif">
+  <style>
+    @keyframes fadeSlide1 { 0%,10% { opacity:0; transform:translateY(12px) } 20%,100% { opacity:1; transform:translateY(0) } }
+    @keyframes fadeSlide2 { 0%,25% { opacity:0; transform:translateY(12px) } 35%,100% { opacity:1; transform:translateY(0) } }
+    @keyframes fadeSlide3 { 0%,40% { opacity:0; transform:translateY(12px) } 50%,100% { opacity:1; transform:translateY(0) } }
+    @keyframes fadeSlide4 { 0%,55% { opacity:0; transform:translateY(12px) } 65%,100% { opacity:1; transform:translateY(0) } }
+    @keyframes arrowDash1 { 0%,22% { stroke-dashoffset:60 } 35%,100% { stroke-dashoffset:0 } }
+    @keyframes arrowDash2 { 0%,37% { stroke-dashoffset:60 } 50%,100% { stroke-dashoffset:0 } }
+    @keyframes arrowDash3 { 0%,52% { stroke-dashoffset:60 } 65%,100% { stroke-dashoffset:0 } }
+    .step1 { animation: fadeSlide1 3s ease-out forwards }
+    .step2 { animation: fadeSlide2 3s ease-out forwards }
+    .step3 { animation: fadeSlide3 3s ease-out forwards }
+    .step4 { animation: fadeSlide4 3s ease-out forwards }
+    .arrow1 { animation: arrowDash1 3s ease-out forwards }
+    .arrow2 { animation: arrowDash2 3s ease-out forwards }
+    .arrow3 { animation: arrowDash3 3s ease-out forwards }
+    .code { font-family: 'Courier New', monospace; font-size: 13px }
+    .label { font-size: 14px; font-weight: 600 }
+    .sublabel { font-size: 11px; fill: #8b949e }
+  </style>
+
+  <rect width="800" height="320" rx="12" fill="#0d1117"/>
+
+  <!-- Title -->
+  <text x="400" y="36" text-anchor="middle" fill="#58a6ff" font-size="16" font-weight="700">Django Migration Flow</text>
+
+  <!-- Step 1: models.py -->
+  <g class="step1" opacity="0">
+    <rect x="30" y="70" width="160" height="110" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <rect x="30" y="70" width="160" height="32" rx="10" fill="#1f6feb22"/>
+    <rect x="30" y="90" width="160" height="12" fill="#161b22"/>
+    <text x="110" y="91" text-anchor="middle" fill="#58a6ff" class="label">models.py</text>
+    <text x="48" y="120" fill="#c9d1d9" class="code">class Student:</text>
+    <text x="48" y="138" fill="#7ee787" class="code">  name = ...</text>
+    <text x="48" y="156" fill="#7ee787" class="code">  age  = ...</text>
+    <text x="110" y="205" text-anchor="middle" fill="#8b949e" class="sublabel">You edit your models</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g class="arrow1">
+    <line x1="200" y1="125" x2="260" y2="125" stroke="#58a6ff" stroke-width="2" stroke-dasharray="60" stroke-dashoffset="60" marker-end="url(#arrowhead)"/>
+  </g>
+
+  <!-- Step 2: makemigrations -->
+  <g class="step2" opacity="0">
+    <rect x="270" y="70" width="180" height="110" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <rect x="270" y="70" width="180" height="32" rx="10" fill="#23863622"/>
+    <rect x="270" y="90" width="180" height="12" fill="#161b22"/>
+    <text x="360" y="91" text-anchor="middle" fill="#3fb950" class="label">makemigrations</text>
+    <text x="288" y="118" fill="#c9d1d9" class="code">Generates:</text>
+    <text x="288" y="138" fill="#ffa657" class="code">0001_initial.py</text>
+    <text x="288" y="156" fill="#ffa657" class="code">0002_add_age.py</text>
+    <text x="360" y="205" text-anchor="middle" fill="#8b949e" class="sublabel">Creates migration files</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g class="arrow2">
+    <line x1="460" y1="125" x2="520" y2="125" stroke="#3fb950" stroke-width="2" stroke-dasharray="60" stroke-dashoffset="60" marker-end="url(#arrowhead2)"/>
+  </g>
+
+  <!-- Step 3: migrate -->
+  <g class="step3" opacity="0">
+    <rect x="530" y="70" width="160" height="110" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <rect x="530" y="70" width="160" height="32" rx="10" fill="#da368822"/>
+    <rect x="530" y="90" width="160" height="12" fill="#161b22"/>
+    <text x="610" y="91" text-anchor="middle" fill="#f778ba" class="label">migrate</text>
+    <text x="548" y="118" fill="#c9d1d9" class="code">Runs SQL:</text>
+    <text x="548" y="138" fill="#d2a8ff" class="code">CREATE TABLE</text>
+    <text x="548" y="156" fill="#d2a8ff" class="code">ALTER TABLE</text>
+    <text x="610" y="205" text-anchor="middle" fill="#8b949e" class="sublabel">Applies to database</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <g class="arrow3">
+    <line x1="555" y1="180" x2="555" y2="230" stroke="#f778ba" stroke-width="2" stroke-dasharray="60" stroke-dashoffset="60" marker-end="url(#arrowhead3)"/>
+  </g>
+
+  <!-- Step 4: Database -->
+  <g class="step4" opacity="0">
+    <rect x="470" y="240" width="280" height="60" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+    <text x="490" y="268" fill="#ffa657" font-size="20">🗄️</text>
+    <text x="520" y="268" fill="#c9d1d9" class="label">Database updated!</text>
+    <text x="520" y="285" fill="#8b949e" class="sublabel">Tables created / altered</text>
+  </g>
+
+  <!-- Version control note -->
+  <g class="step4" opacity="0">
+    <rect x="30" y="240" width="280" height="60" rx="10" fill="#161b22" stroke="#30363d" stroke-width="1.5" stroke-dasharray="4"/>
+    <text x="50" y="268" fill="#ffa657" font-size="20">📁</text>
+    <text x="80" y="268" fill="#c9d1d9" class="label">Migration files = version control</text>
+    <text x="80" y="285" fill="#8b949e" class="sublabel">Track every change to your schema</text>
+  </g>
+
+  <!-- Arrowhead markers -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3fb950"/>
+    </marker>
+    <marker id="arrowhead3" markerWidth="10" markerHeight="7" refX="3.5" refY="9" orient="auto">
+      <polygon points="0 0, 3.5 10, 7 0" fill="#f778ba"/>
+    </marker>
+  </defs>
+</svg>

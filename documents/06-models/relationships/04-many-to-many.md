@@ -28,11 +28,25 @@ class Student(models.Model):
         return self.name
 ```
 
-- You cannot set `on_delete` or `default` on a ManyToManyField — it does not add a column to either table. Instead, Django creates a **junction table** (join table) behind the scenes.
+- You cannot set `on_delete` or `default` on a ManyToManyField — it does not add a column to either table. Instead, Django creates a **junction table** `(join table)` behind the scenes.
 
 ## The junction table
 
-Django automatically creates a third table (e.g. `app_student_courses`) that holds pairs of IDs:
+Django automatically creates a third table that holds pairs of IDs. The table name follows this pattern:
+
+```
+<app_label>_<model_lowercase>_<field_name>
+```
+
+So for a `courses` app with model `Student` and field `courses`, the table is named `courses_student_courses`.
+
+| Part      | Value      | Comes from                          |
+| --------- | ---------- | ----------------------------------- |
+| `courses` | app label  | The app the model belongs to        |
+| `student` | model name | Model class name (lowercased)       |
+| `courses` | field name | The ManyToManyField name on Student |
+
+This table holds pairs of IDs:
 
 | student_id | course_id  |
 | ---------- | ---------- |
@@ -43,6 +57,18 @@ Django automatically creates a third table (e.g. `app_student_courses`) that hol
 | 3 (John)   | 3 (REST)   |
 
 You never touch this table directly — Django manages it through `.add()`, `.remove()`, and `.clear()`.
+
+### Inspecting the junction table
+
+If you want to see the raw data in the join table, you can access it via the `through` model:
+
+```python
+# see all rows in the junction table
+Student.courses.through.objects.all().values()
+# <QuerySet [{'id': 1, 'student_id': 1, 'course_id': 1}, ...]>
+```
+
+- `through` is the auto-generated model Django creates for the junction table. You don't need raw SQL — this gives you full ORM access to it.
 
 ## Creating and linking records
 

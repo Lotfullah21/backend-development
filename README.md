@@ -1,102 +1,88 @@
-# Django Project Documentation
+# Django Learning Repository
 
-## Overview
+This repository contains a small Django project and a set of topic-based notes covering core Django and backend concepts.
 
-This repository contains documentation about a Django project, guiding users on how to create a Django app, detailing the files it contains, and providing a comprehensive detail of each part of a Django application.
+## Repository Overview
 
-## Related Documents
+- `hlab/`: Django project source code
+- `documents/`: learning notes and reference material
 
-- [django](./firstProject/documents/intro-django/README.md)
-- [server](./firstProject/documents/server/README.md)
-- [views](./firstProject/documents/view/README.md)
-- [url](./firstProject/documents/url/README.md)
-- [database](./firstProject/documents/database/README.md)
-- [model](./firstProject/documents/model/README.md)
-- [model-relationships](./firstProject/documents/model/RELATIONSHIPS.md)
-- [model-schema](./firstProject/documents/model/MODELSCHEMA.md)
-- [related_name](./firstProject/documents/model/RLEATED_NAME.md)
-- [migrations](./firstProject/documents/model/MIGRATIONS.md)
-- [save-method](./firstProject/documents/model/SAVEMETHOD.md)
-- [architecture](./firstProject/documents/architecture/README.md)
-- [template](./firstProject/documents/tempalte/README.md)
+## Documentation Index
 
-firstProject/documents/model/RELATIONSHIPS.md
+The main documentation lives under [`documents/`](./documents/).
 
-## 1. Technologies Used
+- [Django introduction](./documents/01-intro-django/README.md)
+- [Framework architecture](./documents/02-framework-architecture/README.md)
+- [Views](./documents/03-views/Readme.md)
+- [URL routing](./documents/03-views/url/Readme.md)
+- [HTTP request and response](./documents/04-htttp/Readme.md)
+- [Errors](./documents/05-errors/Readme.md)
+- [Models](./documents/06-models/Readme.md)
+- [Database notes](./documents/database/README.md)
+- [Server concepts](./documents/server/README.md)
+- [Templates](./documents/tempalte/README.md)
+- [Static files](./documents/static-files/README.md)
+- [Utilities and ORM notes](./documents/utils/README.md)
+- [Forms](./documents/form/FORMS.MD)
+- [Code samples](./documents/code-in-description/CODE.md)
 
-- **Backend and Frontend**: Django (with Django templates for frontend rendering)
-- **Database**: PostgreSQL
-- **Authentication**: Django's built-in authentication system
-- **UI Framework**: Bootstrap (for styling)
-- **Database ORM**: Django ORM
+## Django Project Structure
 
-## 2. Project Structure
+The runnable Django project is in [`hlab/`](./hlab/).
 
-Here is the high-level folder structure for the project:
-
-```bash
-firstProject/
+```text
+hlab/
 ├── manage.py
-├── firstProject/
+├── db.sqlite3
+├── hlab/
+│   ├── asgi.py
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-
-├── home/
+├── accounts/
+│   ├── admin.py
+│   ├── apps.py
 │   ├── models.py
-│   ├── views.py
+│   ├── tests.py
 │   ├── urls.py
-│   └── templates/
-│
-├── docs/
-│
-├── README.md
-└── .gitignore
-
+│   └── views.py
+├── courses/
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations/
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+└── notifications/
+    ├── admin.py
+    ├── apps.py
+    ├── migrations/
+    ├── models.py
+    ├── tests.py
+    └── views.py
 ```
 
-## Setup for the project
+## Getting Started
 
-```sh
-# install python and pip using Homebrew
-brew install python
+### Requirements
 
-# install virtualenv using pip
-python3 -m pip install virtualenv
+- Python 3.11 or newer
+- `pip`
 
-# make a main directory
-mkdir directory_name
-cd directory_name
+### Setup
 
-# create a new virtual environment
-virtualenv env
-
-# activate virtual environment (macOS)
-source env/bin/activate
-
-# add .gitignore and requirements.txt
-touch .gitignore
-touch requirements.txt
-
-# install Django in the virtual environment
-pip install django
-pip install python-dotenv
-
-# check if Django is installed
-django-admin --version
-#
-pip install -r requirements.txt
-# create a new Django project (corrected command)
-django-admin startproject project_name
-
-# go to the project directory
-cd project_name
-
-# create an app inside the project
-django-admin startapp appname
-# or
-python manage.py startapp appname
-
-# start the development server
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install django python-dotenv psycopg2-binary
+cd hlab
+python manage.py migrate
 python manage.py runserver
 ```
+
+Open `http://127.0.0.1:8000/` after the server starts.
+
+## Notes
+
+- Some documentation folder names intentionally use the current on-disk names, such as `tempalte` and `04-htttp`, so the links in this README match the repository exactly.

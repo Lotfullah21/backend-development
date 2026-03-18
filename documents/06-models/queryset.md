@@ -111,7 +111,7 @@ Product.objects.first()        # first record or None
 Product.objects.last()         # last record or None
 ```
 
-> Use `.get()` only when you are certain exactly one record matches. Use `.filter()` when you expect zero or more.
+- Use `.get()` only when you are certain exactly one record matches. Use `.filter()` when you expect zero or more.
 
 **QuerySet vs single instance — the difference matters:**
 
@@ -119,8 +119,8 @@ Product.objects.last()         # last record or None
 # .filter() always returns a QuerySet, even if only one record matches
 products = Product.objects.filter(price=999)
 # <QuerySet [<Product: Laptop>]>
-products.name       # ✗ error — QuerySet has no .name
-products[0].name    # ✓ "Laptop"
+products.name       # error — QuerySet has no .name
+products[0].name    # "Laptop"
 
 # .get() returns the instance directly
 product = Product.objects.get(id=1)
@@ -181,6 +181,48 @@ Product.objects.filter(id__in=[1, 2, 3])       # id is one of these values
 | `__icontains`  | `LIKE '%value%'` case-insensitive |
 | `__startswith` | `LIKE 'value%'`                   |
 | `__in`         | `IN (1, 2, 3)`                    |
+
+## What returns a QuerySet vs a single object
+
+Not every ORM method gives you back the same type. Here's the full picture:
+
+### Returns a QuerySet (chainable)
+
+| Method           | Example                                |
+| ---------------- | -------------------------------------- |
+| `.all()`         | `Product.objects.all()`                |
+| `.filter()`      | `Product.objects.filter(price__lt=50)` |
+| `.exclude()`     | `Product.objects.exclude(name="X")`    |
+| `.order_by()`    | `Product.objects.order_by('name')`     |
+| `.values()`      | `Product.objects.values('name')`       |
+| `.values_list()` | `Product.objects.values_list('name')`  |
+| `.distinct()`    | `Product.objects.distinct()`           |
+| `.reverse()`     | `Product.objects.reverse()`            |
+| `.none()`        | `Product.objects.none()`               |
+
+These can all be chained: `.filter(...).exclude(...).order_by(...)` — they keep returning QuerySets.
+
+### Returns a single object
+
+| Method             | Returns                    | On failure                                         |
+| ------------------ | -------------------------- | -------------------------------------------------- |
+| `.get()`           | One model instance         | Raises `DoesNotExist` or `MultipleObjectsReturned` |
+| `.first()`         | One instance or `None`     | Returns `None` if empty                            |
+| `.last()`          | One instance or `None`     | Returns `None` if empty                            |
+| `.create()`        | The newly created instance | —                                                  |
+| `.get_or_create()` | `(instance, created_bool)` | —                                                  |
+
+### Returns a value (not a QuerySet, not an instance)
+
+| Method         | Returns                            |
+| -------------- | ---------------------------------- |
+| `.count()`     | `int` — number of rows             |
+| `.exists()`    | `bool` — `True` / `False`          |
+| `.aggregate()` | `dict` — e.g. `{'price__avg': 50}` |
+| `.update()`    | `int` — number of rows updated     |
+| `.delete()`    | `tuple` — `(count, {details})`     |
+
+- **QuerySet methods are chainable** — you can stack `.filter().exclude().order_by()`. Methods like `.get()`, `.count()`, and `.delete()` **end the chain** and give you a final result.
 
 ## Seeing the SQL Django generates
 

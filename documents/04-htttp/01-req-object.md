@@ -9,6 +9,26 @@ When a browser sends a request to Django, two objects are at the center of every
 
 Django creates an `HttpRequest` object for every incoming request and passes it as the first argument to your view (always named `request` by convention).
 
+### What does the request object look like?
+
+You never create it yourself — Django builds it from the raw HTTP request and hands it to your view. Think of it as a Python object where every part of the HTTP request is already parsed and stored as an attribute:
+
+```sh
+request
+├── .method          -> "GET"
+├── .path            -> "/books/42/"
+├── .GET             -> {"sort": "price", "page": "2"}   <- query params
+├── .POST            -> {"username": "ali"}               <- form data
+├── .body            -> b'{"title": "..."}'               <- raw JSON body
+├── .headers         -> {"Content-Type": "application/json", ...}
+├── .user            -> <User: ali>  or  AnonymousUser
+├── .FILES           -> {"avatar": <InMemoryUploadedFile>}
+├── .COOKIES         -> {"sessionid": "abc123"}
+└── .session         -> {"cart": [1, 2, 3]}
+```
+
+You read from it — you never write to it (except `request.session`).
+
 ![HttpRequest object](assets/request-object.svg)
 
 ### Reading the request method
@@ -38,6 +58,20 @@ page = int(request.GET.get("page", 1))    # 2   (convert if you need a number)
 ```
 
 Use `.get("key", default)` not `["key"]` — it won't crash if the param is missing.
+
+- **Why two `.get`s in one line?** - `request.GET` and `.get()` are unrelated — one is a Django attribute, the other is a Python dict method.
+
+```py
+request.GET # Django attribute -> the query param dict: {"page": "2"}
+request.GET.get("page", 1) # dict method -> the value for "page", or 1 if missing
+```
+
+- You could split it into two lines to make it obvious:
+
+```py
+params = request.GET # step 1: get the dict
+page = params.get("page", 1) # step 2: get the value from it
+```
 
 ### Reading form data (`POST`)
 

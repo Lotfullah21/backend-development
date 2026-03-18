@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import Http404
 from django.views import View
 from datetime import datetime
 # Create your views here.
+
+
+from .forms import FeedbackForm
 def courses(request):
     return HttpResponse("Courses")
 
@@ -39,7 +43,9 @@ def get_course(request, name):
         "ml":"All about machine learning",
         "dl":"All about deep learning"
     }
-    info = courses[name]
+    info = courses.get(name)
+    if info is None:
+        raise Http404("Course not found")
     message = f"<h1>{name}: </h1><br> <h2>{info}</h2>"
     return HttpResponse(message)
 
@@ -47,6 +53,16 @@ def get_course(request, name):
 class CourseListViews(View):
     def get(self, request):
         return HttpResponse("All courses")
-    
     def post(self, request):
         return HttpResponse("Form submitted")
+
+
+def feedbackform(request):
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            return HttpResponse(f"Thank you for your feedback {name}")
+    else:
+        form = FeedbackForm()
+    return render(request, 'form.html', {'form': form})

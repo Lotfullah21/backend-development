@@ -2,4 +2,4 @@ from django.http import HttpResponse
 
 
 def handler404(request, exception):
-    return HttpResponse("PAGE NOT FOUND")
+    return HttpResponse("PAGE NOT FOUND", status=404)

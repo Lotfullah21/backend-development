@@ -36,7 +36,7 @@ Django takes the **model class name**, converts it to lowercase, and uses that a
 Model class name   ->   Default reverse accessor
 ─────────────────────────────────────────────────
 Student            ->   department.student_set
-UserProfile        ->   user.userprofile         ← no _set, no underscore
+UserProfile        ->   user.userprofile        <- no _set, no underscore
 Profile            ->   user.profile
 ```
 
@@ -88,7 +88,7 @@ department = models.ForeignKey(Department, on_delete=models.CASCADE, related_nam
 user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
 
 # forward:  profile.user
-# reverse:  user.profile          ← no .all() because there is only one
+# reverse:  user.profile         <- no .all() because there is only one
 ```
 
 **ManyToManyField:**

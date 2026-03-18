@@ -1,85 +1,121 @@
-### Migrations
+# Migrations
 
-migrations records changes made to models and implements theses changes to the database schema.
+Migrations are Django's way of tracking changes you make to your models and applying those changes to the database. Think of it as **version control for your database schema**.
 
-## Migrations
+Every time you add a model, change a field, or delete something — Django can detect that and generate the SQL needed to update your database.
 
-Records changes made to models and implements these changes to the database schema.
-Django translates the models into respective database tables in the backend database with a mechanism known as migration. It also propagates any changes in the model structure such as adding, modifying or removing a field attribute of a model class to the mapped table.
-Django migrations allow us to add, modify, and delete models or fields without needing to manually alter our database.
+![Migration Flow](assets/migration-flow.svg)
 
-Django’s migration is a version control system. Whenever you add a new model or effect changes in an existing model, you need to run the `makemigrations` command. It creates a script for making changes in the mapped table. Every time you run the `makemigrations` command and Django detects the changes, a script with its name and version number is created. To implement the changes according to the migration script, you need to run the `migrate` command
+## The two-step process
 
-## 1. `python manage.py makemigrations`
+There are only two commands you need to remember:
 
-The migration script is a set of instructions on what models to create against the database.
-
-#### Purpose:
-
-This command creates migration files based on changes you’ve made to your models (in models.py), in other words it prepare the changes to be made to the model.
-
-#### What it does:
-
-It detects changes to the models in your Django app, such as creating new models, modifying fields, or deleting models/fields.
-It generates new migration files that contain the necessary information to alter the database schema. These migration files are Python files that describe the changes in a way Django can apply them later.
-
-#### What it doesn’t do:
-
-It does not make any changes to the actual database. It only prepares the changes and stores them in migration files.
-
-#### Example:
-
-If you add a new model or field in models.py, running ` python manage.py makemigrations` will generate a migration file like `0002_auto_20211006_1523.py`, which contains the instructions to add that model or field to the database.
-
-## 2. `python manage.py migrate`
-
-### Purpose:
-
-This command applies the migration files to the actual database, altering the database schema according to the instructions in the migration files.
-
-### What it does:
-
-It executes the migrations created by makemigrations by running the necessary SQL commands to modify the database schema.
-It applies the changes to the database, such as creating new tables, adding or modifying fields, or removing models/tables.
-
-#### What it doesn’t do:
-
-It does not generate new migration files. It only applies existing migration files to the database.
-
-#### Example:
-
-After running python manage.py makemigrations, if you run python manage.py migrate, it will apply the changes in the migration file to the database, like creating new tables or adding columns.
+### Step 1: `makemigrations` — detect changes
 
 ```sh
 python manage.py makemigrations
-python manage.py showmigrations
-python manage.py migrate
-# shows sql command
-manage.py sqlmigrate myapp
 ```
 
-Django will automatically translate our Python model into the necessary SQL to create the tables in the database.
+This scans your `models.py` files, compares them to the previous migration files, and generates a new migration file describing what changed.
 
-## using custom sql
+```
+Migrations for 'courses':
+  courses/migrations/0001_initial.py
+    - Create model Course
+    - Create model Student
+```
+
+- This does **not** touch the database. It only creates a Python file with instructions.
+
+### Step 2: `migrate` — apply changes
+
+```sh
+python manage.py migrate
+```
+
+This reads the migration files and runs the actual SQL against your database — creating tables, adding columns, etc.
+
+```
+Applying courses.0001_initial... OK
+```
+
+- This is the step that modifies your database.
+
+## What a migration file looks like
+
+When you run `makemigrations`, Django creates a file like `0001_initial.py` inside your app's `migrations/` folder:
+
+```
+courses/
+└── migrations/
+    ├── __init__.py
+    ├── 0001_initial.py      <- first migration
+    └── 0002_add_age.py      <- next change
+```
+
+Each file is numbered sequentially. Django uses these numbers to know the order in which to apply changes.
+
+## Useful commands
+
+### See which migrations have been applied
+
+```sh
+python manage.py showmigrations
+```
+
+Output:
+
+```
+courses
+ [X] 0001_initial       <- applied
+ [ ] 0002_add_age       <- not yet applied
+```
+
+### See the SQL a migration will run
+
+```sh
+python manage.py sqlmigrate courses 0001
+```
+
+Output:
 
 ```sql
-CREATE TABLE user(
-    "id" serial NOT NULL PRIMARY KEY
-    "first_name" varchar(30) NOT NULL
-    "last_name" varchar(30) NOT NULL
-)
+CREATE TABLE "courses_course" (
+    "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" varchar(100) NOT NULL
+);
 ```
 
-| Command                           | What it does                                           | What it doesn’t do                  |
-| --------------------------------- | ------------------------------------------------------ | ----------------------------------- |
-| `python manage.py makemigrations` | Detects changes to models and creates migration files  | Does not modify the database        |
-| `python manage.py migrate`        | Applies migration files and alters the database schema | Does not create new migration files |
+- This is great for learning — you can see exactly what Django does behind the scenes.
 
-## schema
+## Common workflow
 
-a schema is a blueprint or structure that defines how data is organized and how the relationships among different entities are managed within a database.
+```sh
+# 1. Edit your model
+# 2. Generate the migration
+python manage.py makemigrations
 
-A schema
+# 3. Check what will run (optional)
+python manage.py sqlmigrate myapp 0001
 
-- specifies the tables in a database, fields in table
-- determines the relationship between the tables, one-to-many, one-to-one, many-to-many
+# 4. Apply it
+python manage.py migrate
+```
+
+## When do you need to run migrations?
+
+Run `makemigrations` + `migrate` whenever you:
+
+- Create a new model
+- Add, remove, or rename a field
+- Change a field's type or options (e.g., `max_length`, `null`, `default`)
+- Add or change a relationship (`ForeignKey`, `ManyToManyField`, etc.)
+
+## Quick reference
+
+| Command                             | What it does                                   |
+| ----------------------------------- | ---------------------------------------------- |
+| `python manage.py makemigrations`   | Detects model changes, creates migration files |
+| `python manage.py migrate`          | Applies migration files to the database        |
+| `python manage.py showmigrations`   | Lists all migrations and their applied status  |
+| `python manage.py sqlmigrate app N` | Shows the SQL that a migration will execute    |
